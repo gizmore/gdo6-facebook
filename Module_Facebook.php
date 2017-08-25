@@ -74,7 +74,7 @@ final class Module_Facebook extends Module
     		    $config['persistent_data_handler'] = 'memory';
     		}
     		
-    		$fb = new Facebook\Facebook($config);
+    		$fb = new \Facebook\Facebook($config);
 	    }
 	    return $fb;
 	}
