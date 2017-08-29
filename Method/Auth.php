@@ -1,11 +1,11 @@
 <?php
 namespace GDO\Facebook\Method;
 
-use GDO\Core\GDO_Hook;
-use GDO\Facebook\GDO_FBAuthButton;
+use GDO\Core\GDT_Hook;
+use GDO\Facebook\GDT_FBAuthButton;
 use GDO\Facebook\Module_Facebook;
 use GDO\Facebook\OAuthToken;
-use GDO\Form\GDO_Form;
+use GDO\Form\GDT_Form;
 use GDO\Form\MethodForm;
 use GDO\Login\Method\Form;
 use GDO\User\User;
@@ -30,10 +30,10 @@ final class Auth extends MethodForm
 		return parent::execute();
 	}
 	
-	public function createForm(GDO_Form $form)
+	public function createForm(GDT_Form $form)
 	{
 		$form->addFields(array(
-			GDO_FBAuthButton::make(),
+			GDT_FBAuthButton::make(),
 		));
 	}
 	
@@ -64,8 +64,8 @@ final class Auth extends MethodForm
 	    # Temp was in activation state?
 	    if ($activated)
 	    {
-	        GDO_Hook::call('UserActivated', $user);
-	        GDO_Hook::call('FBUserActivated', $user, substr($user->getVar('user_name'), 4));
+	        GDT_Hook::call('UserActivated', $user);
+	        GDT_Hook::call('FBUserActivated', $user, substr($user->getVar('user_name'), 4));
 	    }
 	    
 	    

@@ -2,11 +2,11 @@
 namespace GDO\Facebook;
 
 use GDO\DB\GDO;
-use GDO\Net\GDO_IP;
-use GDO\Type\GDO_Char;
-use GDO\Type\GDO_String;
-use GDO\Type\GDO_Text;
-use GDO\User\GDO_User;
+use GDO\Net\GDT_IP;
+use GDO\Type\GDT_Char;
+use GDO\Type\GDT_String;
+use GDO\Type\GDT_Text;
+use GDO\User\GDT_User;
 use GDO\User\User;
 /**
  * Mapping of ProviderID to userid.
@@ -23,10 +23,10 @@ final class OAuthToken extends GDO
 	public function gdoColumns()
 	{
 		return array(
-			GDO_Char::make('oauth_provider')->ascii()->caseS()->size(2)->primary(),
-			GDO_String::make('oauth_id')->ascii()->caseS()->max(32)->primary(),
-			GDO_User::make('oauth_user')->notNull(),
-			GDO_Text::make('oauth_token')->utf8()->caseS()->max(4096),
+			GDT_Char::make('oauth_provider')->ascii()->caseS()->size(2)->primary(),
+			GDT_String::make('oauth_id')->ascii()->caseS()->max(32)->primary(),
+			GDT_User::make('oauth_user')->notNull(),
+			GDT_Text::make('oauth_token')->utf8()->caseS()->max(4096),
 		);
 	}
 	
@@ -60,7 +60,7 @@ final class OAuthToken extends GDO
 				'user_name' => $name,
 				'user_real_name' => $displayName,
 				'user_password' => $provider,
-				'user_register_ip' => GDO_IP::current(),
+				'user_register_ip' => GDT_IP::current(),
 			))->insert();
 			$user->tempSet('justActivated', true);
 		}
