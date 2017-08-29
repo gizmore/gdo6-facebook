@@ -3,8 +3,8 @@ namespace GDO\Facebook\Websocket;
 
 use GDO\Facebook\Module_Facebook;
 use GDO\Facebook\Method\Auth;
-use GDO\User\Session;
-use GDO\User\User;
+use GDO\User\GDO_Session;
+use GDO\User\GDO_User;
 use GDO\Websocket\Server\GWS_Command;
 use GDO\Websocket\Server\GWS_Commands;
 use GDO\Websocket\Server\GWS_Message;
@@ -28,8 +28,8 @@ final class GWS_Facebook extends GWS_Command
     {
         $method->gotAccessToken($accessToken);
         
-        User::$CURRENT = $user = Session::instance()->getUser();
-        Session::reset();
+        GDO_User::$CURRENT = $user = GDO_Session::instance()->getUser();
+        GDO_Session::reset();
         $msg->replyBinary($msg->cmd(), $this->userToBinary($user));
     }
 }

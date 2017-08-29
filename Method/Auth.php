@@ -4,11 +4,11 @@ namespace GDO\Facebook\Method;
 use GDO\Core\GDT_Hook;
 use GDO\Facebook\GDT_FBAuthButton;
 use GDO\Facebook\Module_Facebook;
-use GDO\Facebook\OAuthToken;
+use GDO\Facebook\GDO_OAuthToken;
 use GDO\Form\GDT_Form;
 use GDO\Form\MethodForm;
 use GDO\Login\Method\Form;
-use GDO\User\User;
+use GDO\User\GDO_User;
 /**
  * Facebook OAuth connector.
  * @author gizmore
@@ -54,7 +54,7 @@ final class Auth extends MethodForm
 	{
 	    $fb = Module_Facebook::instance()->getFacebook();
 	    $response = $fb->get('/me?fields=id,name,email', $accessToken);
-	    $user = OAuthToken::refresh($accessToken->getValue(), $response->getGraphUser()->asArray());
+	    $user = GDO_OAuthToken::refresh($accessToken->getValue(), $response->getGraphUser()->asArray());
 	    
 	    $activated = $user->tempGet('justActivated');
 	    
@@ -71,7 +71,7 @@ final class Auth extends MethodForm
 	    
 	}
 	
-	private function authenticate(Form $method, User $user)
+	private function authenticate(Form $method, GDO_User $user)
 	{
 		return $method->loginSuccess($user);
 	}

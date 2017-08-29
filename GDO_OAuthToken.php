@@ -7,7 +7,7 @@ use GDO\Type\GDT_Char;
 use GDO\Type\GDT_String;
 use GDO\Type\GDT_Text;
 use GDO\User\GDT_User;
-use GDO\User\User;
+use GDO\User\GDO_User;
 /**
  * Mapping of ProviderID to userid.
  * Mapping is only possible via username field.
@@ -18,7 +18,7 @@ use GDO\User\User;
  * @version 5.0
  *
  */
-final class OAuthToken extends GDO
+final class GDO_OAuthToken extends GDO
 {
 	public function gdoColumns()
 	{
@@ -51,11 +51,11 @@ final class OAuthToken extends GDO
 		$displayName = $fbVars['name'];
 		
 		$name = "-$provider-$id"; # Build ProviderUsername
-		if (!($user = User::getByName($name))) # And get by name
+		if (!($user = GDO_User::getByName($name))) # And get by name
 		{
 			# Not found => Create with fb data 
-			$user = User::blank(array(
-				'user_type' => User::MEMBER,
+			$user = GDO_User::blank(array(
+				'user_type' => GDO_User::MEMBER,
 				'user_email' => $email,
 				'user_name' => $name,
 				'user_real_name' => $displayName,

@@ -1,16 +1,16 @@
 <?php
 namespace GDO\Facebook;
 
-use GDO\Avatar\UserAvatar;
+use GDO\Avatar\GDO_UserAvatar;
 use GDO\Core\Application;
-use GDO\Core\Module;
+use GDO\Core\GDO_Module;
 use GDO\Form\GDT_Form;
 use GDO\Template\Error;
 use GDO\Template\Message;
 use GDO\Type\GDT_Checkbox;
 use GDO\Type\GDT_Secret;
 use GDO\UI\GDT_Link;
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\Util\HTTP;
 /**
  * Facebook SDK Module and Authentication.
@@ -22,11 +22,11 @@ use GDO\Util\HTTP;
  * @see OAuthToken
  * @see GDT_FBAuthButton
  */
-final class Module_Facebook extends Module
+final class Module_Facebook extends GDO_Module
 {
 	public $module_priority = 45;
 	
-	public function getClasses() { return ['GDO\Facebook\OAuthToken']; }
+	public function getClasses() { return ['GDO\Facebook\GDO_OAuthToken']; }
 	public function onLoadLanguage() { $this->loadLanguage('lang/facebook'); }
 
 	##############
@@ -92,14 +92,14 @@ final class Module_Facebook extends Module
 		$form->addField(GDT_Link::make('link_fb_auth')->href(href('Facebook', 'Auth')));
 	}
 	
-	public function hookFBUserActivated(User $user, string $fbId)
+	public function hookFBUserActivated(GDO_User $user, string $fbId)
 	{
 		if ($avatar = Application::instance()->getActiveModule('Avatar'))
 		{
 			$url = "http://graph.facebook.com/$fbId/picture";
 			if ($contents = HTTP::getFromURL($url))
 			{
-				if (UserAvatar::createAvatarFromString($user, "FB-Avatar-$fbId.jpg", $contents))
+			    if (GDO_UserAvatar::createAvatarFromString($user, "FB-Avatar-$fbId.jpg", $contents))
 				{
 					echo Message::message('msg_fb_avatar_imported')->render();
 					return;
