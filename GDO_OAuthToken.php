@@ -31,7 +31,7 @@ final class GDO_OAuthToken extends GDO
 	}
 	
 	/**
-	 * @return User
+	 * @return GDO_User
 	 */
 	public function getUser() { return $this->getValue('oauth_user'); }
 	public function getUserID() { return $this->getVar('oauth_user'); }
@@ -41,7 +41,7 @@ final class GDO_OAuthToken extends GDO
 	 * Refresh login tokens and user association.
 	 * @param string $token
 	 * @param array $fbVars
-	 * @return User
+	 * @return GDO_User
 	 */
 	public static function refresh($token, array $fbVars, $provider='FB')
 	{
