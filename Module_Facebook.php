@@ -11,7 +11,7 @@ use GDO\Type\GDT_Checkbox;
 use GDO\Type\GDT_Secret;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
-use GDO\Util\HTTP;
+use GDO\Net\HTTP;
 /**
  * Facebook SDK Module and Authentication.
  * 
