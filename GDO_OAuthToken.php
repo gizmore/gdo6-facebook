@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Facebook;
 
-use GDO\DB\GDO;
+use GDO\Core\GDO;
 use GDO\Net\GDT_IP;
 use GDO\Type\GDT_Char;
 use GDO\Type\GDT_String;
