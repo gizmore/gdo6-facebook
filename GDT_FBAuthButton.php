@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Facebook;
 
-use GDO\Template\GDT_Template;
+use GDO\Core\GDT_Template;
 use GDO\UI\GDT_Button;
 /**
  * Login with Facebook button.

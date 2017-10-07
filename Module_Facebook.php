@@ -5,19 +5,19 @@ use GDO\Avatar\GDO_UserAvatar;
 use GDO\Core\Application;
 use GDO\Core\GDO_Module;
 use GDO\Form\GDT_Form;
-use GDO\Template\Error;
-use GDO\Template\Message;
-use GDO\Type\GDT_Checkbox;
-use GDO\Type\GDT_Secret;
+use GDO\DB\GDT_Checkbox;
+use GDO\Core\GDT_Secret;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\Net\HTTP;
+use GDO\Core\GDT_Success;
+use GDO\Core\GDT_Error;
 /**
  * Facebook SDK Module and Authentication.
  * 
  * @author gizmore
  * @since 4.0
- * @version 5.0
+ * @version 6.05
  * 
  * @see OAuthToken
  * @see GDT_FBAuthButton
@@ -92,7 +92,7 @@ final class Module_Facebook extends GDO_Module
 		$form->addField(GDT_Link::make('link_fb_auth')->href(href('Facebook', 'Auth')));
 	}
 	
-	public function hookFBUserActivated(GDO_User $user, string $fbId)
+	public function hookFBUserActivated(GDO_User $user, $fbId)
 	{
 		if ($avatar = Application::instance()->getActiveModule('Avatar'))
 		{
@@ -101,11 +101,11 @@ final class Module_Facebook extends GDO_Module
 			{
 			    if (GDO_UserAvatar::createAvatarFromString($user, "FB-Avatar-$fbId.jpg", $contents))
 				{
-					echo Message::message('msg_fb_avatar_imported')->render();
+					echo GDT_Success::with('msg_fb_avatar_imported')->render();
 					return;
 				}
 			}
 		}
-		echo Error::error('err_fb_avatar_not_imported')->render();
+		echo GDT_Error::with('fb_avatar_not_imported')->render();
 	}
 }

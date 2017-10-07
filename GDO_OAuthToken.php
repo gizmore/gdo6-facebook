@@ -3,9 +3,9 @@ namespace GDO\Facebook;
 
 use GDO\Core\GDO;
 use GDO\Net\GDT_IP;
-use GDO\Type\GDT_Char;
-use GDO\Type\GDT_String;
-use GDO\Type\GDT_Text;
+use GDO\DB\GDT_Char;
+use GDO\DB\GDT_String;
+use GDO\DB\GDT_Text;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 /**
