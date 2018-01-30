@@ -25,10 +25,10 @@ final class GWS_Facebook extends GWS_Command
         
         $accessToken = $helper->getAccessToken();
         
-        $this->onAccess($accessToken, method('Facebook', 'Auth'));
+        $this->onAccess($msg, $accessToken, method('Facebook', 'Auth'));
     }
     
-    public function onAccess($accessToken, Auth $method)
+    public function onAccess(GWS_Message $msg, $accessToken, Auth $method)
     {
         $method->gotAccessToken($accessToken);
         
