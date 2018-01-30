@@ -94,7 +94,7 @@ final class Module_Facebook extends GDO_Module
 	
 	public function hookFBUserActivated(GDO_User $user, $fbId)
 	{
-		if ($avatar = Application::instance()->getActiveModule('Avatar'))
+		if (module_enabled('Avatar'))
 		{
 			$url = "http://graph.facebook.com/$fbId/picture";
 			if ($contents = HTTP::getFromURL($url))

@@ -16,11 +16,15 @@ final class GWS_Facebook extends GWS_Command
         $fbUID = $msg->readString();
         $fbExpire = time() + $msg->read32u();
         $fbAccessToken = $msg->readString();
+        $fbCookie = $msg->readString();
+        $_COOKIE['fbsr_'.Module_Facebook::instance()->cfgAppID()] = $fbCookie;
         
         $fb = Module_Facebook::instance()->getFacebook();
         $fb->setDefaultAccessToken($fbAccessToken);
-        $helper = $fb->getRedirectLoginHelper();
+        $helper = $fb->getJavaScriptHelper();
+        
         $accessToken = $helper->getAccessToken();
+        
         $this->onAccess($accessToken, method('Facebook', 'Auth'));
     }
     
