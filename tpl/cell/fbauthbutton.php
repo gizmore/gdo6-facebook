@@ -1,8 +1,7 @@
 <?php
 use GDO\Facebook\GDT_FBAuthButton;
-use GDO\UI\GDT_Button;
-
+use GDO\UI\GDT_Link;
 $field instanceof GDT_FBAuthButton;
-?>
-<?php $icon = sprintf('<img src="GDO/Facebook/img/fb-btn.png" title="%s" style="width: 300px;" />', t('btn_continue_with_fb')); ?>
-<?= GDT_Button::make()->noLabel()->href($field->href)->rawIcon($icon); ?>
+$icon = sprintf('<img src="GDO/Facebook/img/fb-btn.png" title="%s" style="width: 300px;" />', t('btn_continue_with_fb'));
+
+echo GDT_Link::make()->noLabel()->href($field->href)->rawIcon($icon)->render();

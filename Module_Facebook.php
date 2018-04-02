@@ -12,6 +12,7 @@ use GDO\User\GDO_User;
 use GDO\Net\HTTP;
 use GDO\Core\GDT_Success;
 use GDO\Core\GDT_Error;
+use GDO\UI\GDT_Button;
 /**
  * Facebook SDK Module and Authentication.
  * 
@@ -89,7 +90,7 @@ final class Module_Facebook extends GDO_Module
 	public function hookLoginForm(GDT_Form $form) { $this->hookRegisterForm($form); }
 	public function hookRegisterForm(GDT_Form $form)
 	{
-		$form->addField(GDT_Link::make('link_fb_auth')->href(href('Facebook', 'Auth')));
+		$form->addField(GDT_Button::make('link_fb_auth')->secondary()->href(href('Facebook', 'Auth')));
 	}
 	
 	public function hookFBUserActivated(GDO_User $user, $fbId)
