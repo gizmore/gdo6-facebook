@@ -53,31 +53,31 @@ final class Module_Facebook extends GDO_Module
 	 */
 	public function getFacebook()
 	{
-	    static $fb;
-	    if (!isset($fb))
-	    {
-    		require_once $this->filePath('php-graph-sdk/src/Facebook/autoload.php');
+		static $fb;
+		if (!isset($fb))
+		{
+			require_once $this->filePath('php-graph-sdk/src/Facebook/autoload.php');
 
-	        $config = array(
-	            'app_id' => $this->cfgAppID(),
-	            'app_secret' => $this->cfgSecret(),
-	            'cookie' => true,
-	        );
-    		
-    		if (!Application::instance()->isCLI())
-    		{
-    			# lib requires normal php sessions.
-    			if (!session_id()) { session_start(); }
-    			$config['persistent_data_handler'] = 'session';
-    		}
-    		else
-    		{
-    		    $config['persistent_data_handler'] = 'memory';
-    		}
-    		
-    		$fb = new \Facebook\Facebook($config);
-	    }
-	    return $fb;
+			$config = array(
+				'app_id' => $this->cfgAppID(),
+				'app_secret' => $this->cfgSecret(),
+				'cookie' => true,
+			);
+			
+			if (!Application::instance()->isCLI())
+			{
+				# lib requires normal php sessions.
+				if (!session_id()) { session_start(); }
+				$config['persistent_data_handler'] = 'session';
+			}
+			else
+			{
+				$config['persistent_data_handler'] = 'memory';
+			}
+			
+			$fb = new \Facebook\Facebook($config);
+		}
+		return $fb;
 	}
 	
 	#############
@@ -100,7 +100,7 @@ final class Module_Facebook extends GDO_Module
 			$url = "http://graph.facebook.com/$fbId/picture";
 			if ($contents = HTTP::getFromURL($url))
 			{
-			    if (GDO_UserAvatar::createAvatarFromString($user, "FB-Avatar-$fbId.jpg", $contents))
+				if (GDO_UserAvatar::createAvatarFromString($user, "FB-Avatar-$fbId.jpg", $contents))
 				{
 					echo GDT_Success::with('msg_fb_avatar_imported')->render();
 					return;

@@ -17,9 +17,9 @@ use GDO\User\GDO_User;
  */
 final class Auth extends MethodForm
 {
-    public function isUserRequired() { return false; }
-    
-    public function getUserType() { return 'ghost'; }
+	public function isUserRequired() { return false; }
+	
+	public function getUserType() { return 'ghost'; }
 	
 	public function execute()
 	{
@@ -44,7 +44,7 @@ final class Auth extends MethodForm
 		$accessToken = $helper->getAccessToken();
 		if ($accessToken)
 		{
-		    $this->gotAccessToken($accessToken);
+			$this->gotAccessToken($accessToken);
 			return $this->message('msg_facebook_connected')->add($response);
 		}
 		return $this->error('err_facebook_connect');
@@ -52,23 +52,23 @@ final class Auth extends MethodForm
 	
 	public function gotAccessToken($accessToken)
 	{
-	    $fb = Module_Facebook::instance()->getFacebook();
-	    $response = $fb->get('/me?fields=id,name,email', $accessToken);
-	    $user = GDO_OAuthToken::refresh($accessToken->getValue(), $response->getGraphUser()->asArray());
-	    
-	    $activated = $user->tempGet('justActivated');
-	    
-	    # Temp is cleared here
-	    $response = $this->authenticate(method('Login', 'Form'), $user);
-	    
-	    # Temp was in activation state?
-	    if ($activated)
-	    {
-	        GDT_Hook::call('UserActivated', $user);
-	        GDT_Hook::call('FBUserActivated', $user, substr($user->getVar('user_name'), 4));
-	    }
-	    
-	    
+		$fb = Module_Facebook::instance()->getFacebook();
+		$response = $fb->get('/me?fields=id,name,email', $accessToken);
+		$user = GDO_OAuthToken::refresh($accessToken->getValue(), $response->getGraphUser()->asArray());
+		
+		$activated = $user->tempGet('justActivated');
+		
+		# Temp is cleared here
+		$response = $this->authenticate(method('Login', 'Form'), $user);
+		
+		# Temp was in activation state?
+		if ($activated)
+		{
+			GDT_Hook::call('UserActivated', $user);
+			GDT_Hook::call('FBUserActivated', $user, substr($user->getVar('user_name'), 4));
+		}
+		
+		
 	}
 	
 	private function authenticate(Form $method, GDO_User $user)
