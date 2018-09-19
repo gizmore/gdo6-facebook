@@ -31,9 +31,11 @@ final class GWS_Facebook extends GWS_Command
 	public function onAccess(GWS_Message $msg, $accessToken, Auth $method)
 	{
 		$method->gotAccessToken($accessToken);
-		
+
 // 		GDO_User::$CURRENT = $user = GDO_Session::instance()->getUser();
 // 		GDO_Session::reset();
+
+		$user = GDO_User::current();
 		$msg->replyBinary($msg->cmd(), $this->userToBinary($user));
 	}
 }
