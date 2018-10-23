@@ -47,7 +47,7 @@ final class GDO_OAuthToken extends GDO
 	{
 		# Provider data
 		$id = $fbVars['id'];
-		$email = $fbVars['email'];
+		$email = @$fbVars['email'];
 		$displayName = $fbVars['name'];
 		
 		$name = "-$provider-$id"; # Build ProviderUsername
