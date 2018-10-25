@@ -9,6 +9,7 @@ use GDO\Form\GDT_Form;
 use GDO\Form\MethodForm;
 use GDO\Login\Method\Form;
 use GDO\User\GDO_User;
+use GDO\User\GDO_Session;
 /**
  * Facebook OAuth connector.
  * @author gizmore
@@ -45,7 +46,7 @@ final class Auth extends MethodForm
 		if ($accessToken)
 		{
 			$this->gotAccessToken($accessToken);
-			return $this->message('msg_facebook_connected')->add($response);
+			return $this->message('msg_facebook_connected'); #->add($response);
 		}
 		return $this->error('err_facebook_connect');
 	}
@@ -55,6 +56,9 @@ final class Auth extends MethodForm
 		$fb = Module_Facebook::instance()->getFacebook();
 		$response = $fb->get('/me?fields=id,name,email', $accessToken);
 		$user = GDO_OAuthToken::refresh($accessToken->getValue(), $response->getGraphUser()->asArray());
+		
+		GDO_User::$CURRENT = $user;
+		GDO_Session::instance()->saveVar('sess_user', $user->getID());
 		
 		$activated = $user->tempGet('justActivated');
 		
