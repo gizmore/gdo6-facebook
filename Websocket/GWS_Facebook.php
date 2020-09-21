@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Facebook\Websocket;
 
+use GDO\Core\Application;
 use GDO\Core\Module_Core;
 use GDO\Facebook\Module_Facebook;
 use GDO\Facebook\Method\Auth;
@@ -15,7 +16,7 @@ final class GWS_Facebook extends GWS_Command
 	public function execute(GWS_Message $msg)
 	{
 		$fbUID = $msg->readString();
-		$fbExpire = time() + $msg->read32u();
+		$fbExpire = Application::$TIME + $msg->read32u();
 		$fbAccessToken = $msg->readString();
 		$fbCookie = $msg->readString();
 		$_COOKIE['fbsr_'.Module_Facebook::instance()->cfgAppID()] = $fbCookie;
