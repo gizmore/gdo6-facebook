@@ -23,7 +23,7 @@ final class GDO_OAuthToken extends GDO
 	public function gdoColumns()
 	{
 		return array(
-			GDT_Char::make('oauth_provider')->ascii()->caseS()->size(2)->primary(),
+			GDT_Char::make('oauth_provider')->ascii()->caseS()->length(2)->primary(),
 			GDT_String::make('oauth_id')->ascii()->caseS()->max(32)->primary(),
 			GDT_User::make('oauth_user')->notNull(),
 			GDT_Text::make('oauth_token')->utf8()->caseS()->max(4096),
