@@ -9,7 +9,7 @@ use GDO\Form\GDT_Form;
 use GDO\Form\MethodForm;
 use GDO\Login\Method\Form;
 use GDO\User\GDO_User;
-use GDO\User\GDO_Session;
+use GDO\Session\GDO_Session;
 /**
  * Facebook OAuth connector.
  * @author gizmore
