@@ -29,7 +29,8 @@ final class Module_Facebook extends GDO_Module
 	
 	public function getClasses() { return ['GDO\Facebook\GDO_OAuthToken']; }
 	public function onLoadLanguage() { $this->loadLanguage('lang/facebook'); }
-
+	public function thirdPartyFolders() { return ['/php-']; }
+	
 	##############
 	### Config ###
 	##############
@@ -90,7 +91,9 @@ final class Module_Facebook extends GDO_Module
 	public function hookLoginForm(GDT_Form $form) { $this->hookRegisterForm($form); }
 	public function hookRegisterForm(GDT_Form $form)
 	{
-		$form->addField(GDT_Button::make('link_fb_auth')->secondary()->href(href('Facebook', 'Auth')));
+	    /** @var $cont \GDO\UI\GDT_Container **/
+	    $cont = $form->getField('btncont');
+	    $cont->addField(GDT_Button::make('link_fb_auth')->secondary()->href(href('Facebook', 'Auth')));
 	}
 	
 	public function hookFBUserActivated(GDO_User $user, $fbId)
