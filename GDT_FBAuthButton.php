@@ -9,7 +9,7 @@ use GDO\UI\GDT_Button;
  */
 final class GDT_FBAuthButton extends GDT_Button
 {
-	public function __construct()
+	protected function __construct()
 	{
 		$this->name('btn_facebook');
 		$this->href($this->facebookURL());
