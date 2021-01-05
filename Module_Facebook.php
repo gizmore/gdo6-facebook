@@ -55,7 +55,7 @@ final class Module_Facebook extends GDO_Module
 	public function getFacebook()
 	{
 		static $fb;
-		if (!isset($fb))
+		if (!$fb)
 		{
 			require_once $this->filePath('php-graph-sdk/src/Facebook/autoload.php');
 
