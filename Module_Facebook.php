@@ -92,8 +92,7 @@ final class Module_Facebook extends GDO_Module
 	public function hookRegisterForm(GDT_Form $form)
 	{
 	    /** @var $cont \GDO\UI\GDT_Container **/
-	    $cont = $form->getField('btncont');
-	    $cont->addField(GDT_Button::make('link_fb_auth')->secondary()->href(href('Facebook', 'Auth')));
+	    $form->actions()->addField(GDT_Button::make('link_fb_auth')->secondary()->href(href('Facebook', 'Auth')));
 	}
 	
 	public function hookFBUserActivated(GDO_User $user, $fbId)
