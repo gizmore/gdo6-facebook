@@ -7,12 +7,13 @@ use GDO\Core\GDO_Module;
 use GDO\Form\GDT_Form;
 use GDO\DB\GDT_Checkbox;
 use GDO\Core\GDT_Secret;
-use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\Net\HTTP;
 use GDO\Core\GDT_Success;
 use GDO\Core\GDT_Error;
 use GDO\UI\GDT_Button;
+use GDO\Core\GDT_Array;
+
 /**
  * Facebook SDK Module and Authentication.
  * 
@@ -111,4 +112,10 @@ final class Module_Facebook extends GDO_Module
 		}
 		echo GDT_Error::with('fb_avatar_not_imported')->render();
 	}
+	
+	public function hookIgnoreDocsFiles(GDT_Array $ignore)
+	{
+	    $ignore->data[] = 'GDO/Facebook/php-graph-sdk/**/*';
+	}
+	
 }
