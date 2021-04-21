@@ -18,8 +18,8 @@ use GDO\Core\GDT_Array;
  * Facebook SDK Module and Authentication.
  * 
  * @author gizmore
- * @since 4.0
- * @version 6.05
+ * @version 6.10.1
+ * @since 4.0.0
  * 
  * @see OAuthToken
  * @see GDT_FBAuthButton
@@ -37,11 +37,11 @@ final class Module_Facebook extends GDO_Module
 	##############
 	public function getConfig()
 	{
-		return array(
+		return [
 			GDT_Checkbox::make('fb_auth')->initial('1'),
 			GDT_Secret::make('fb_app_id')->ascii()->caseS()->max(32)->initial('224073134729877'),
 			GDT_Secret::make('fb_secret')->ascii()->caseS()->max(64)->initial('f0e9ee41ea8d2dd2f9d5491dc81783e8'),
-		);
+		];
 	}
 	public function cfgAuth() { return $this->getConfigValue('fb_auth'); }
 	public function cfgAppID() { return $this->getConfigValue('fb_app_id'); }
@@ -60,11 +60,11 @@ final class Module_Facebook extends GDO_Module
 		{
 			require_once $this->filePath('php-graph-sdk/src/Facebook/autoload.php');
 
-			$config = array(
+			$config = [
 				'app_id' => $this->cfgAppID(),
 				'app_secret' => $this->cfgSecret(),
 				'cookie' => true,
-			);
+			];
 			
 			if (!Application::instance()->isCLI())
 			{
@@ -92,8 +92,12 @@ final class Module_Facebook extends GDO_Module
 	public function hookLoginForm(GDT_Form $form) { $this->hookRegisterForm($form); }
 	public function hookRegisterForm(GDT_Form $form)
 	{
-	    /** @var $cont \GDO\UI\GDT_Container **/
-	    $form->actions()->addField(GDT_Button::make('link_fb_auth')->secondary()->href(href('Facebook', 'Auth')));
+	    if ($this->cfgAuth())
+	    {
+    	    $form->actions()->addField(
+    	        GDT_Button::make('link_fb_auth')->secondary()->href(
+    	            href('Facebook', 'Auth')));
+	    }
 	}
 	
 	public function hookFBUserActivated(GDO_User $user, $fbId)

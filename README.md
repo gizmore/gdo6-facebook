@@ -1,15 +1,19 @@
-# gwf5-facebook
-Facebook module for gwf5, primary oauth.
+# gdo6-facebook
+
+Facebook module for gdo6, primary oauth.
 
 
 ## Installation
 
-cd module && git clone https://github.com/gizmore/gwf5-facebook Facebook
+    cd gdo6/GDO
+    git clone --recusive https://github.com/gizmore/gdo6-facebook Facebook
+    cd gdo6
+    ./gdoadm.sh install Facebook
+ 
 
+## Configuration   
 
-## Facebook Login
-You need to clone the facebook-graph-sdk into the Facebook module.
+Configure app token via admin module or via gdoadm.sh cli.
 
-    cd module/Facebook
-    git clone https://github.com/facebook/php-graph-sdk
-
+    ./gdoadm.sh config Facebook fb_app_id <YOUR_APP_ID_HERE>
+    ./gdoadm.sh config Facebook fb_secret <YOUR_APP_SECRET_HERE>
