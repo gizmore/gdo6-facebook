@@ -46,7 +46,7 @@ final class Auth extends MethodForm
 		if ($accessToken)
 		{
 			$this->gotAccessToken($accessToken);
-			return $this->message('msg_facebook_connected'); #->add($response);
+			return $this->message('msg_facebook_connected'); #->addField($response);
 		}
 		return $this->error('err_facebook_connect');
 	}
