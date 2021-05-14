@@ -57,7 +57,7 @@ final class Auth extends MethodForm
 		$response = $fb->get('/me?fields=id,name,email', $accessToken);
 		$user = GDO_OAuthToken::refresh($accessToken->getValue(), $response->getGraphUser()->asArray());
 		
-		GDO_User::$CURRENT = $user;
+		GDO_User::setCurrent($user);
 		GDO_Session::instance()->saveVar('sess_user', $user->getID());
 		
 		$activated = $user->tempGet('justActivated');
