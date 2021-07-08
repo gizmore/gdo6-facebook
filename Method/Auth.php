@@ -68,7 +68,7 @@ final class Auth extends MethodForm
 		# Temp was in activation state?
 		if ($activated)
 		{
-			GDT_Hook::callWithIPC('UserActivated', $user);
+			GDT_Hook::callWithIPC('UserActivated', $user, null);
 			GDT_Hook::callWithIPC('FBUserActivated', $user, substr($user->getVar('user_name'), 4));
 		}
 		
